@@ -1,6 +1,8 @@
-"use strict";
+
 
 function binarySearch(key, array) {
+  "use strict";
+
   var low = 0;
   var hi = array.length;
 
@@ -21,6 +23,8 @@ function binarySearch(key, array) {
 // Array does not need to be sorted.
 // Inefficient.
 function bruteForceBinarySearch(key, array) {
+  "use strict";
+
   for (var i = 0; i < array.length; i++) {
     if (array[i] == key) {
       return i;
