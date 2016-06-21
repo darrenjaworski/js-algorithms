@@ -23,6 +23,8 @@ function selectionSort(array) {
 }
 
 function swap(array, firstIndex, secondIndex) {
+  "use strict";
+  
   var temp = array[firstIndex];
   array[firstIndex] = array[secondIndex];
   array[secondIndex] = temp;
