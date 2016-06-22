@@ -51,7 +51,9 @@ function swap(array, firstIndex, secondIndex) {
 
 
 var items = [5, 25, 10, 4, 1, 100];
+var itemsCopy = items.slice();
 
 insertionSort(items);
+insertionSortTwo(itemsCopy);
 
-console.log(items);
+console.log(items, itemsCopy);
