@@ -24,10 +24,11 @@ function selectionSort(array) {
 
 function swap(array, firstIndex, secondIndex) {
   "use strict";
-  
+
   var temp = array[firstIndex];
   array[firstIndex] = array[secondIndex];
   array[secondIndex] = temp;
+  return array;
 }
 
 var items = ['b', 'a', 'd', 'e', 'c'];

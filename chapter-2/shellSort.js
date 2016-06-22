@@ -31,6 +31,7 @@ function swap(array, firstIndex, secondIndex) {
   var temp = array[firstIndex];
   array[firstIndex] = array[secondIndex];
   array[secondIndex] = temp;
+  return array;
 }
 
 var items = [10, 20, 5, 4, -7, 100, 50];
