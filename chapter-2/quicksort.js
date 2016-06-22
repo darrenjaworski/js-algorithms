@@ -8,25 +8,34 @@
 // For mergesort, the array is divided in half; for quicksort, the position of the partition depends on the contents of the array.
 
 function quicksort(array) {
+  "use strict";
+
   sort(array, 0, array.length - 1);
   return array;
 }
 
 function sort(array, low, hi) {
+  "use strict";
+
   if (hi <= low) {
     return;
   }
+
   var j = partition(array, low, hi);
   j = parseInt(j);
+
   sort(array, low, j - 1);
   sort(array, j + 1, hi);
   return array;
 }
 
 function partition(array, low, hi) {
+  "use strict";
+
   var i = low;
   var j = hi + 1;
   var value = array[low];
+
   while (true) {
 
     while ( array[++i] < value ) {
@@ -40,9 +49,11 @@ function partition(array, low, hi) {
         break;
       }
     }
+
     if (i >= j) {
       break;
     }
+
     swap(array, i, j);
   }
 
