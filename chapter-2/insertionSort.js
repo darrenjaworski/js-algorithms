@@ -21,14 +21,14 @@ function insertionSortTwo(array) {
   "use strict";
 
   var n = array.length;
-  var next;
+  var value;
   for (var i = 1; i < n; i++) {
 
-    next = array[i];
+    value = array[i];
 
     for (var j = i - 1; j >= 0; j--) {
 
-      if (array[j] > next) {
+      if (array[j] > value) {
         array[j+1] = array[j];
       } else {
         break;
@@ -36,7 +36,7 @@ function insertionSortTwo(array) {
 
     }
 
-    array[j+1] = next;
+    array[j+1] = value;
   }
   return array;
 }

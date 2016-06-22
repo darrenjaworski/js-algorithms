@@ -3,7 +3,7 @@
 
 // h has to be type cast to an integer, thus the use of parseInt().
 
-function shellSort(array) {
+function shellsort(array) {
   "use strict";
 
   var n = array.length;
@@ -35,6 +35,6 @@ function swap(array, firstIndex, secondIndex) {
 
 var items = [10, 20, 5, 4, -7, 100, 50];
 
-shellSort(items);
+shellsort(items);
 
 console.log(items);
