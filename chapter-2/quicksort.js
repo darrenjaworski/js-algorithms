@@ -80,7 +80,7 @@ function partition(array, low, hi) {
 function quicksortThreeWay(array) {
   "use strict";
 
-  sort(array, 0, array.length - 1);
+  threeWaySort(array, 0, array.length - 1);
   return array;
 }
 
@@ -125,6 +125,11 @@ function swap(array, firstIndex, secondIndex) {
   array[secondIndex] = temp;
   return array;
 }
+
+// Fun fact.
+// The javascript built in Array.prototype.sort([compareFunction]) requires a compare function.
+// Without which the default is to convert the item to a string and compare on Unicode code point order.
+// This produces [ '1', '10', '2', '20', '3' ] from a shuffled version of that array.
 
 function compareTo(first, second) {
   if (first > second) {
