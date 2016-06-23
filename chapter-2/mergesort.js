@@ -12,7 +12,7 @@
 // We see that the sort code simply provides an organized way to sequence the calls to the merge() method.
 
 function topDownMergesort(array) {
-  "use-strict";
+  "use strict";
 
   sort(array, 0, array.length - 1);
 
@@ -20,7 +20,7 @@ function topDownMergesort(array) {
 }
 
 function sort(array, low, hi) {
-  "use-strict";
+  "use strict";
 
   if (hi <= low) {
     return;
@@ -37,7 +37,7 @@ function sort(array, low, hi) {
 // abstract in-place merge
 
 function merge(array, low, mid, hi) {
-  "use-strict";
+  "use strict";
 
   var i = low;
   var j = mid + 1;
@@ -73,7 +73,7 @@ function merge(array, low, mid, hi) {
 // of equal size, doubling the sorted subarray size for the next pass.
 
 function bottomUpMergesort(array) {
-  "use-strict";
+  "use strict";
 
   var n = array.length;
   for (var sz = 1; sz < n; sz = sz + sz) {
