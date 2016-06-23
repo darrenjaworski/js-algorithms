@@ -15,7 +15,6 @@ function topDownMergesort(array) {
   "use strict";
 
   sort(array, 0, array.length - 1);
-
   return array;
 }
 
@@ -32,6 +31,7 @@ function sort(array, low, hi) {
   sort(array, low, mid);
   sort(array, mid + 1, hi);
   merge(array, low, mid, hi);
+  return array;
 }
 
 // abstract in-place merge
@@ -83,6 +83,7 @@ function bottomUpMergesort(array) {
     }
 
   }
+  return array;
 }
 
 

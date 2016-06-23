@@ -111,8 +111,8 @@ function threeWaySort(array, low, hi) {
 
   }
 
-  quicksortThreeWay(array, low, lt - 1);
-  quicksortThreeWay(array, gt + 1, hi);
+  threeWaySort(array, low, lt - 1);
+  threeWaySort(array, gt + 1, hi);
 
   return array;
 }
@@ -141,7 +141,7 @@ function compareTo(first, second) {
   return 0;
 }
 
-var items = [10, 12, 4, 5, 11, 20, 1, 4];
+var items = [13, 10, 12, 4, 5, 11, 20, 1, 4, 20];
 var itemsCopy = items.slice();
 
 quicksort(items);
