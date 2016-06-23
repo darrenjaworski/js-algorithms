@@ -22,12 +22,24 @@ function sort(array, low, hi) {
   }
 
   var j = partition(array, low, hi);
-  j = parseInt(j);
 
   sort(array, low, j - 1);
   sort(array, j + 1, hi);
   return array;
 }
+
+
+// The crux of the method is the partitioning process, which rearranges the array
+// to make the following three conditions hold:
+// The entry a[j] is in its final place in the array, for some j.
+// No entry in a[lo] through a[j-1] is greater than a[j].
+// No entry in a[j+1] through a[hi] is less than a[j].
+//
+// This code partitions on the item 'value' in a[low].
+// The main loop exits when the scan indices i and j cross.
+// Within the loop, we increment i while a[i] is less than v and decrement j while a[j] is greater than v,
+// then do an exchange to maintain the invariant property that no entries to the left of i are greater than v and no entries to the right of j are smaller than v.
+// Once the indices meet, we complete the partitioning by exchanging a[lo] with a[j] (thus leaving the partitioning value in a[j]).
 
 function partition(array, low, hi) {
   "use strict";
@@ -61,6 +73,50 @@ function partition(array, low, hi) {
   return j;
 }
 
+// This sort code partitions to put keys equal to the partitioning element in place
+// and thus does not have to include those keys in the subarrays for the recursive calls.
+// It is far more efficient than the standard quicksort implementation for arrays with large numbers of duplicate keys.
+
+function quicksortThreeWay(array) {
+  "use strict";
+
+  sort(array, 0, array.length - 1);
+  return array;
+}
+
+
+function threeWaySort(array, low, hi) {
+  "use strict";
+
+  if (hi <= low) {
+    return;
+  }
+
+  var lt = low;
+  var i = low + 1;
+  var gt = hi;
+
+  var v = array[low];
+
+  while (i <= gt) {
+    var compare = compareTo(array[i], v);
+
+    if (compare < 0) {
+      swap(array, lt++, i++);
+    } else if (compare > 0) {
+      swap(array, i, gt--);
+    } else {
+      i++;
+    }
+
+  }
+
+  quicksortThreeWay(array, low, lt - 1);
+  quicksortThreeWay(array, gt + 1, hi);
+
+  return array;
+}
+
 function swap(array, firstIndex, secondIndex) {
   "use strict";
 
@@ -70,8 +126,21 @@ function swap(array, firstIndex, secondIndex) {
   return array;
 }
 
+function compareTo(first, second) {
+  if (first > second) {
+    return 1;
+  }
+  if (first < second) {
+    return -1;
+  }
+  return 0;
+}
+
 var items = [10, 12, 4, 5, 11, 20, 1, 4];
+var itemsCopy = items.slice();
 
 quicksort(items);
+quicksortThreeWay(itemsCopy);
 
 console.log(items);
+console.log(itemsCopy);
