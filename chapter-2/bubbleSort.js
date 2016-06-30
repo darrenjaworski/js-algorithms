@@ -7,7 +7,7 @@
 function bubbleSort(array) {
   "use strict";
 
-  var n = array.length - 1;
+  var n = array.length;
   var swapped;
 
   do {
