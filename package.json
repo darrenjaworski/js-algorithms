@@ -1,0 +1,24 @@
+{
+  "name": "js-algorithms",
+  "version": "1.0.0",
+  "description": "Algorithms book in JS",
+  "main": "na",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "d3-array": "^1.0.0"
+  },
+  "scripts": {
+    "test": "na"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darrenjaworski/js-algorithms.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/darrenjaworski/js-algorithms/issues"
+  },
+  "homepage": "https://github.com/darrenjaworski/js-algorithms#readme"
+}
