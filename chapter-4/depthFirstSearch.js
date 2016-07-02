@@ -38,33 +38,64 @@ graph.edges = d3.range(edgeTotal).map(function(i) {
 });
 
 
-function DepthFirstSearch(graphObject, nodeIndex) {
-  var marked = [];
-  var count = 0;
+var DepthFirstSearch = {
+  marked: [],
+  edgeTo: [],
+  source: 0,
+  count: 0,
+  dfs: function(graphObject, nodeIndex) {
 
-  dfs(graphObject, nodeIndex);
+    var self = DepthFirstSearch;
 
-  function dfs(graphObject, nodeIndex) {
+    dfs(graphObject, nodeIndex);
 
-    marked[nodeIndex] = true;
-    count++;
+    function dfs(graphObject, nodeIndex) {
 
-    graphObject.adjacent[nodeIndex].forEach(function(d){
+      self.marked[nodeIndex] = true;
+      self.count++;
 
-      if (!marked[d]) {
-        dfs(graph, d);
-      }
+      graphObject.adjacent[nodeIndex].forEach(function(d){
 
-    });
+        if (!self.marked[d]) {
+          self.edgeTo[d] = nodeIndex;
+          dfs(graphObject, d);
+        }
+
+      });
+
+      return;
+
+    }
 
     return;
+  },
+  dfPath: function(graphObject, nodeIndex) {
+    var self = DepthFirstSearch;
 
+    self.dfs(graphObject, nodeIndex);
+  },
+  hasPathTo: function(endIndex) {
+    var self = DepthFirstSearch;
+
+    return self.marked[endIndex];
+  },
+  pathTo: function(graphObject, startIndex, endIndex) {
+    var self = DepthFirstSearch;
+
+    self.dfPath(graphObject, startIndex);
+
+    if (!self.hasPathTo(endIndex)) {
+      return null;
+    }
+    var path = [];
+    for (var i = endIndex; i != startIndex; i = self.edgeTo[i]) {
+      path.push(i);
+    }
+    path.push(startIndex);
+    return path.reverse();
   }
+};
 
-  return { count: count, marked: marked };
-
-}
-
-var test = DepthFirstSearch(graph, 0);
+var test = DepthFirstSearch.pathTo(graph, 0, 10);
 
 console.log(test);
