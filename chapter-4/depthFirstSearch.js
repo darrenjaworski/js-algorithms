@@ -69,11 +69,6 @@ var DepthFirstSearch = {
 
     return;
   },
-  dfPath: function(graphObject, nodeIndex) {
-    var self = DepthFirstSearch;
-
-    self.dfs(graphObject, nodeIndex);
-  },
   hasPathTo: function(endIndex) {
     var self = DepthFirstSearch;
 
@@ -82,7 +77,7 @@ var DepthFirstSearch = {
   pathTo: function(graphObject, startIndex, endIndex) {
     var self = DepthFirstSearch;
 
-    self.dfPath(graphObject, startIndex);
+    self.dfs(graphObject, startIndex);
 
     if (!self.hasPathTo(endIndex)) {
       return null;
