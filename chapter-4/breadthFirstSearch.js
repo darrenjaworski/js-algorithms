@@ -1,7 +1,7 @@
 var d3 = require('d3-array');
 
 // generate random graph object
-var nodeTotal = 50;
+var nodeTotal = 11;
 var edgeTotal = nodeTotal * 1.5;
 
 var graph = {
@@ -38,45 +38,39 @@ graph.edges = d3.range(edgeTotal).map(function(i) {
 });
 
 
-var DepthFirstSearch = {
+var BreadthFirstSearch = {
   marked: [],
   edgeTo: [],
   count: 0,
-  dfs: function(graphObject, nodeIndex) {
+  bfs: function(graphObject, nodeIndex) {
+    var self = BreadthFirstSearch;
+    var queue = [];
 
-    var self = DepthFirstSearch;
+    self.marked[nodeIndex] = true;
+    queue.push(nodeIndex);
 
-    dfs(graphObject, nodeIndex);
-
-    function dfs(graphObject, nodeIndex) {
-
-      self.marked[nodeIndex] = true;
-      self.count++;
-
-      graphObject.adjacent[nodeIndex].forEach(function(d){
-
-        if (!self.marked[d]) {
-          self.edgeTo[d] = nodeIndex;
-          dfs(graphObject, d);
-        }
-
-      });
-
-      return;
-
+    while (queue.length > 0) {
+      var v = queue.shift();
+      graphObject.adjacent[v].forEach(markedAdjacent);
     }
 
-    return;
-  },
-  hasPathTo: function(endIndex) {
-    var self = DepthFirstSearch;
+    function markedAdjacent(d) {
+      if (!self.marked[d]) {
+        self.edgeTo[d] = v;
+        self.marked[d] = true;
+        queue.push(d);
+      }
+    }
 
+  },
+  hasPathTo: function(endIndex){
+    var self = BreadthFirstSearch;
     return self.marked[endIndex];
   },
   pathTo: function(graphObject, startIndex, endIndex) {
-    var self = DepthFirstSearch;
+    var self = BreadthFirstSearch;
 
-    self.dfs(graphObject, startIndex);
+    self.bfs(graphObject, startIndex);
 
     if (!self.hasPathTo(endIndex)) {
       return null;
@@ -90,6 +84,6 @@ var DepthFirstSearch = {
   }
 };
 
-var test = DepthFirstSearch.pathTo(graph, 0, 10);
+var test = BreadthFirstSearch.pathTo(graph, 0, 10);
 
 console.log(test);
