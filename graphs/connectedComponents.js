@@ -19,6 +19,10 @@ graph.edges = d3.range(edgeTotal).map(function(i) {
   var source = i < nodeTotal ? i : Math.floor(Math.random() * nodeTotal);
   var target = Math.floor(Math.random() * nodeTotal);
 
+  while (source == target) {
+    target = Math.floor(Math.random() * nodeTotal);
+  }
+
   var edge = {
     source: source,
     target: target

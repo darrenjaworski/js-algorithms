@@ -23,6 +23,10 @@ graph.edges = d3.range(edgeTotal).map(function(i) {
   var target = Math.floor(Math.random() * nodeTotal);
   var weight = Math.random();
 
+  while (source == target) {
+    target = Math.floor(Math.random() * nodeTotal);
+  }
+
   var edge = {
     source: source,
     target: target,
@@ -42,51 +46,40 @@ graph.edges = d3.range(edgeTotal).map(function(i) {
   return edge;
 });
 
-// Prim's algorithm is a greedy algorithm that finds a
-// minimum spanning tree for a weighted undirected graph.
-// This means it finds a subset of the edges that forms a tree
-// that includes every vertex, where the total weight
-// of all the edges in the tree is minimized.
 
-var prim = {
-  marked: [],
-  queue: [],
-  minPQ: [],
+
+var kruskal = {
   mst: [],
-  lazyPrimMST: function(graph) {
-    var self = prim;
+  minPQ: [],
+  kruskalMST: function(graph) {
+    var self = kruskal;
 
-    self.visit(graph, 0);
-    while(self.minPQ.length > 0) {
+    while (self.minPQ.length > 0 && self.mst.length < graph.nodes.length) {
+
       var edge = self.delMin(self.minPQ);
       var v = self.either(edge);
       var w = self.other(edge, v);
-
-      if (self.marked[v] && self.marked[w]) {
+      if (self.connected(v, w)) {
         continue;
       }
-
+      self.union(v, w);
       self.mst.push(edge);
 
-      if (!self.marked[v]) {
-        self.visit(graph, v);
-      }
-      if (!self.marked[w]) {
-        self.visit(graph, w);
-      }
     }
+
     return self.mst;
+
   },
-  visit: function(graph, node) {
-    var self = prim;
+  connected: function(p, q) {
+    var self = kruskal;
 
-    self.marked[node] = true;
+    return self.find(p) == self.find(q);
+  },
+  find: function() {
 
-    graph.adjacent[node].forEach(function(d){
-        if ( !self.marked[self.other(d, node)] ) {
-          self.minPQ.push(d);
-        }
-    });
+  },
+  union: function() {
+
   },
   other: function(edge, node) {
     if (node == edge.source) {
@@ -116,8 +109,3 @@ var prim = {
     return lowestWeightEdge;
   }
 };
-
-var test = prim.lazyPrimMST(graph);
-
-console.log(graph);
-console.log(test);
